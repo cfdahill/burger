@@ -7,21 +7,26 @@ var routes = express.Router();
 var burger = require("../models/burger.js");
 
 routes.get("/", function (req, res) {
-    burger.all(function (data) {
-        res.render("index", data);
+    burger.selectAll(function (data) {
+        var hbsObject = {
+            burgers: data
+          };
+        res.render("index", hbsObject);
     });
 });
 
 routes.post("/api/burgers", function (req, res) {
-    burger.insert(req.body.newBurger, function (results) {
-        res.json({ id: result.insertId });
+    burger.insertOne(req.body.newBurger, function (results) {
+        console.log("req.body.text: " + req.body.newBurger);
+        console.log(req.is('json'));
+        res.json();
     });
 });
 
 routes.put("/api/burgers/:id", function (req, res) {
     var id = req.params.id;
-    burger.update(id, function (results) {
-        if (result.changedRows == 0) {
+    burger.updateOne(id, function (results) {
+        if (results.changedRows == 0) {
             return res.status(404).end();
         } else {
             res.status(200).end();

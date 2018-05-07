@@ -14,7 +14,7 @@ var connection = require("./connection.js");
 
 var orm = {
     selectAll: function(table, cb) {
-        queryString = "SELECT * FROM ??";
+        var queryString = "SELECT * FROM ??;";
         connection.query(queryString, [table], function(err, data){
             if (err) {
                 console.log("orm.js, selectAll error: " + err);
@@ -24,7 +24,7 @@ var orm = {
     },
     insertOne: function(table, column, value, cb) {
         //this is for a database with one column of user input
-        queryString = "INSERT INTO ?? (??) VALUES (?)"
+        var queryString = "INSERT INTO ?? (??) VALUES (?);"
         connection.query(queryString, [table, column, value], function(err, data){
             if (err) {
                 console.log("orm.js, insertOne error: " + err);
@@ -34,12 +34,14 @@ var orm = {
     },
     updateOne: function(table, changeColumn, newValue, idColumn, id, cb) {
         //this is for a database in which only one column will be changed
-        queryString = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
-        connection.query(quertyString, [table, changeColumn, newValue, idColumn, id], function(err, data){
+        var queryString = "UPDATE ?? SET ?? = ? WHERE ?? = ?;";
+        connection.query(queryString, [table, changeColumn, newValue, idColumn, id], function(err, data){
             if (err) {
                 console.log("orm.js, updateOne error: " + err);
             }
             cb(data);
         });
     }
-}
+};
+
+module.exports = orm;
