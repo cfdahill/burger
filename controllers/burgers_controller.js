@@ -16,9 +16,8 @@ routes.get("/", function (req, res) {
 });
 
 routes.post("/api/burgers", function (req, res) {
-    burger.insertOne(req.body.newBurger, function (results) {
-        console.log("req.body.text: " + req.body.newBurger);
-        console.log(req.is('json'));
+    console.log("req.body.text: " + req.body.burger_name);
+    burger.insertOne(req.body.burger_name, function (results) {
         res.json();
     });
 });

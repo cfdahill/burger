@@ -14,8 +14,8 @@ $(function () {
             data: newBurger
         }).then(function () {
             console.log("Added new burger: " + newBurger);
-            location.reload();
         });
+        location.reload();
     });
 
 
