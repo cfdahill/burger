@@ -1,7 +1,8 @@
 //connect node to mysql and export this
+require("dotenv").config();
+ 
 
 var mysql = require("mysql")
-
 var connection;
 
 if (process.env.JAWSDB_URL) {
@@ -11,7 +12,7 @@ if (process.env.JAWSDB_URL) {
     port: 3306,
     host: "localhost",
     user: "root",
-    password: "3Bl!ndm!ce",
+    password: process.env.MYSQL_PW,
     database: "burgers_db"
 });
 }
