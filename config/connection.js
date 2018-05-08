@@ -14,7 +14,7 @@ if (process.env.JAWSDB_URL) {
     password: "3Bl!ndm!ce",
     database: "burgers_db"
 });
-
+}
 connection.connect(function(err) {
     if (err) {
         console.log("error connecting to mysql: " + err.stack);
